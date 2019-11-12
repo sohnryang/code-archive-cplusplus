@@ -7,26 +7,27 @@
 using namespace std;
 
 class FenwickTree {
-private:
-    vector<int> tree;
-public:
-    FenwickTree(int n) : tree(n + 1) {}
+ private:
+  vector<int> tree;
 
-    int range_sum(int pos) {
-        ++pos;
-        int ret = 0;
-        while (pos > 0) {
-            ret += tree[pos];
-            pos &= (pos - 1);
-        }
-        return ret;
-    }
+ public:
+  FenwickTree(int n) : tree(n + 1) {}
 
-    void update(int pos, int val) {
-        ++pos;
-        while (pos < tree.size()) {
-            tree[pos] += val;
-            pos += (pos & -pos);
-        }
+  int range_sum(int pos) {
+    ++pos;
+    int ret = 0;
+    while (pos > 0) {
+      ret += tree[pos];
+      pos &= (pos - 1);
     }
+    return ret;
+  }
+
+  void update(int pos, int val) {
+    ++pos;
+    while (pos < tree.size()) {
+      tree[pos] += val;
+      pos += (pos & -pos);
+    }
+  }
 };
