@@ -2,6 +2,11 @@
  * Edmonds-Karp algorithm
  */
 
+#include <queue>
+#include <vector>
+
+using namespace std;
+
 const int MAX_V = 111;
 const int INF = 1 << 30;
 
@@ -14,7 +19,7 @@ void augment(int v, int min_edge) {
   else if (parent[v] != -1) {
     augment(parent[v], min(min_edge, graph[parent[v]][v]));
     graph[parent[v]][v] -= f;
-    graph[v][p[v]] += f;
+    graph[v][parent[v]] += f;
   }
 }
 
